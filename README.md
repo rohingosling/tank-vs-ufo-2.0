@@ -1,4 +1,4 @@
-# Tank vs UFO 2.0 (Commodore VIC-20)
+# Tank vs UFO 2.0 (Assembly Language Rewrite)
 
 ![Assembly](https://img.shields.io/badge/Assembly-40318D?style=flat&logoColor=white)
 ![Machine Language](https://img.shields.io/badge/Machine_Language-AA7449?style=flat&logoColor=white)
@@ -7,9 +7,9 @@
 ![Commodore VIC-20](https://img.shields.io/badge/Commodore_VIC--20-1428A0?style=flat&logo=commodore&logoColor=white)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat)
 
-|||
-|:---:|:---:|
-|![](images/screenshots/screenshot-gameplay-1.png)|![](images/screenshots/screenshot-gameplay-2.png)|
+![](images/screenshots/tank-vs-ufo-2.0-assembly-rewrite.gif)
+
+See [YouTube](https://www.youtube.com/watch?v=hgRPHROP4tU) video, for recording with sound.
 
 **Tank vs UFO 2.0** is an assembly rewrite of the 1981 **BASIC** type-in game *Tank-v-UFO* by Duane Later, from the **Commodore VIC-20** User's Manual. The original's gameplay is preserved, with one strafing UFO at a time dropping aimed bombs, a tank trundling along the ground line, endless play with a UFOS/TANKS kill tally. But the engine underneath is brand new, with a non-blocking state machine, clocked by a single 60 Hz frame loop, so the game never pauses the way the original **BASIC** version did during events like air explosions for example.
 
