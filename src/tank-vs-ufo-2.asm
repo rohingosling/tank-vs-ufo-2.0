@@ -1,6 +1,6 @@
 //********************************************************************************
 // Program: Tank vs UFO (Commodore VIC-20) - Assembly re-write
-// Version: 2.0
+// Version: 2.0 (As in, Duane Later's original is version 1.0)
 // Date:    2021-03-06
 // Author:  Rohin Gosling
 //
