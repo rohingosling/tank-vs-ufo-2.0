@@ -14,7 +14,7 @@
 
 **Tank vs UFO 2.0** is an assembly language rewrite of the 1981 **BASIC** type-in game, **Tank-v-UFO**, by *Duane Later*, from the **Commodore VIC-20** User's Manual. The original game's gameplay mechanics is preserved, with one strafing UFO at a time dropping aimed bombs, a tank trundling along the ground line, endless play with a UFOS/TANKS kill tally. But the engine underneath is brand new, with a non-blocking state machine, clocked by a single 60 Hz frame loop optimised for PAL, so the game never pauses the way the original **BASIC** version did during events like air explosions for example.
 
-- **Faithful gameplay:** <br>One UFO at a time, aimed bombs, endless play and score chase (no win condition), the same as the originally published versions of the original.
+- **Faithful gameplay:** <br>Like *Duane Later's* original, one UFO at a time, aimed bombs, endless play and score chase (no win condition), the same as the originally published versions of the original.
 
 - **Non-blocking engine:** <br>The tank stays under player control while a UFO explodes, UFOs keep strafing while the tank burns, and bullet-vs-bomb intercepts never pause play.
 
@@ -60,7 +60,7 @@ Deliberate improvements over the 1981 original:
 | 7 | The lowest UFO strafing altitude is raised one character row (flight rows 4–16). |
 | 8 | **Symmetric tank travel:** <br>I'm not sure if the original version had a bug, or if it was perhaps a intentional strategic decision to prevent scrolling when characters are printed to the bottom-right cell of the screen. Either way, the original left the rightmost column unreachable by the tank. In this version, the column clamp is 0–16 making horizontal travel by the tank symmetrical across the screen. |
 | 9 | **Q quits at any time** <br>A stub in the cassette buffer wipes the game's RAM and resets cleanly to **BASIC**. The original **BASIC** version could be escaped easily with `RUN/STOP` or `RUN/STOP + RESTORE` to return to **BASIC**. However, because this rewrite is a machine language program, the `RUN/STOP` key won't work. So the game implements a machine reset and binds it to the `Q` key to give a user a way to return to **BASIC**. |
-| 10 | **Event durations re-tuned:** <br>While the idea with this project was to keep the game emchanics faithfull to the original, I took the liverty of speeding up game pace a bit by tuning event timings as follows. <br>- Tank burn 1.0 s <br>- Ground fire 1.0 s <br>- Shot fade 0.5 s <br>- Air explosion 3 × 150 ms |
+| 10 | **Event durations re-tuned:** <br>While the idea with this project was to keep the game mechanics faithful to the original, I took the liberty of speeding up game pace a bit by tuning event timings as follows. <br>- Tank burn 1.0 s <br>- Ground fire 1.0 s <br>- Shot fade 0.5 s <br>- Air explosion 3 × 150 ms |
 
 Original-edition bugs fixed (bugs, not behavior):
 
