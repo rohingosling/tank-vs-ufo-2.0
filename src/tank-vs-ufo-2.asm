@@ -47,7 +47,7 @@
 //      - Air explosion, 3 frames graded by heat: red centre cell; yellow
 //        centre with red arms; yellow arms with a transparent centre.
 //      - Ground puff (a bomb missing the tank), 3 frames, black: "\|/"
-//        splash; dust dots over the splash; dots only.
+//        splash; spaced dust dots over the splash; dots only.
 //      - Burning tank / crashed UFO fire: the original's two flame glyphs
 //        alternate; the burning tank's fire is heat-graded (red flame tips
 //        on the gun row, yellow solid base on the hull row).
@@ -978,10 +978,11 @@ bomb_draw:
 
 //--------------------------------------------------------------------------------
 // Ground puff: a bomb that misses bursts where it lands. Three animated
-// frames, 150 ms each, all black:
+// frames, 150 ms each, all black. The dust dots sit one blank cell apart,
+// spanning five columns (burst_col - 2 .. burst_col + 2):
 //
 //   frame 1:   (nothing)     frame 2:   . . .     frame 3:   . . .
-//              \ | /                    \ | /                (nothing)
+//               \|/                      \|/                 (nothing)
 //--------------------------------------------------------------------------------
 
 ground_burst:
@@ -1045,34 +1046,48 @@ draw_puff_dots:
                 ldx #ROW_ABOVE_IMPACT
                 ldy burst_col
                 dey
+                dey
                 lda #3
                 sta loop_count
 draw_puff_dot_loop:
                 lda #CHAR_BULLET            // "." dust, same glyph as the original.
                 jsr plot_black_clamped
-                iny
+                iny                         // Two cells per step: a blank cell
+                iny                         // separates each pair of dots.
                 dec loop_count
                 bne draw_puff_dot_loop
 draw_puff_done:
                 rts
 
-// Erase the puff's full 3 x 2 footprint (both rows), edge-clamped.
+// Erase the puff's full footprint, edge-clamped: the 3-cell splash row plus
+// the three spaced dust dots above it (5 columns, every second cell).
 
 erase_puff:
-                ldx #ROW_IMPACT
-                jsr erase_puff_row
-                ldx #ROW_ABOVE_IMPACT
-erase_puff_row:
+                ldx #ROW_IMPACT             // Splash row: 3 contiguous cells.
                 ldy burst_col
                 dey
                 lda #3
                 sta loop_count
-erase_puff_cell:
+erase_splash_cell:
                 lda #CHAR_SPACE
                 jsr plot_black_clamped
                 iny
                 dec loop_count
-                bne erase_puff_cell
+                bne erase_splash_cell
+
+                ldx #ROW_ABOVE_IMPACT       // Dust row: 3 dots, 2 cells apart.
+                ldy burst_col
+                dey
+                dey
+                lda #3
+                sta loop_count
+erase_dust_cell:
+                lda #CHAR_SPACE
+                jsr plot_black_clamped
+                iny
+                iny
+                dec loop_count
+                bne erase_dust_cell
                 rts
 
 // Plot A at row X / column Y in black, skipping columns outside 0..21.
